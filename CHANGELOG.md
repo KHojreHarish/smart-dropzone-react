@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2024-12-26
+
+### 🔗 Repository & Metadata Updates
+
+#### ✨ Added
+
+- **GitHub Repository Link**: Updated package.json with correct GitHub repository URL
+- **Author Information**: Updated author field with proper GitHub profile link
+- **Repository URLs**: Fixed all repository-related URLs to point to correct GitHub repo
+
+#### 🔧 Fixed
+
+- **Repository URL**: Changed from old repository to `https://github.com/KHojreHarish/smart-dropzone-react`
+- **Bugs URL**: Updated issues URL to correct repository
+- **Homepage URL**: Updated homepage to point to correct README
+
 ## [0.1.2] - 2024-12-26
 
 ### 🚀 React 19 Compatibility & Fixes
