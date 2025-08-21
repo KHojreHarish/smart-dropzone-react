@@ -1,0 +1,45 @@
+# Source files
+src/
+src/**/*.test.ts
+src/**/*.test.tsx
+src/**/*.spec.ts
+src/**/*.spec.tsx
+src/__mocks__/
+
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+__mocks__/
+coverage/
+.nyc_output/
+
+# Development files
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build tools
+tsup.config.ts
+vite.config.ts
+vitest.config.ts
+vitest.setup.ts
+tsconfig.json
+.eslintrc.js
+.prettierrc
+
+# Git
+.git/
+.gitignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
