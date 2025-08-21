@@ -1,1 +1,0 @@
-{"version":3,"file":"smart-dropzone.d.ts","sourceRoot":"","sources":["../../src/components/smart-dropzone.tsx"],"names":[],"mappings":"AAAA,OAAO,KAA+B,MAAM,OAAO,CAAC;AAEpD,OAAO,KAAK,EAAE,kBAAkB,EAAE,cAAc,EAAE,MAAM,UAAU,CAAC;AAMnE;;GAEG;AACH,eAAO,MAAM,aAAa,EAAE,KAAK,CAAC,EAAE,CAClC,kBAAkB,GAAG;IAAE,QAAQ,EAAE,cAAc,CAAA;CAAE,CAuSlD,CAAC"}
