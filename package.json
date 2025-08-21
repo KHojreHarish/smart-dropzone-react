@@ -1,6 +1,6 @@
 {
   "name": "smart-dropzone-react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "🚀 A production-ready React dropzone component with smart defaults, drag & drop reordering, chunked uploads, resume functionality, and comprehensive provider support (Cloudinary, AWS S3, Supabase)",
   "type": "module",
   "main": "./dist/index.js",
@@ -37,8 +37,8 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "rm -rf dist && tsc && echo 'Build complete - dist folder created'",
-    "build:full": "tsc --outDir dist --declaration",
+    "build": "rm -rf dist && tsup",
+    "build:full": "tsup",
     "type-check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -60,7 +60,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "react-dropzone": "^14.3.8",
-    "smart-dropzone-react": "^0.1.1",
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {

@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2024-12-26
+
+### 🚀 React 19 Compatibility & Fixes
+
+#### ✨ Added
+
+- **React 19 Support**: Full compatibility with React 19.x while maintaining React 18.x support
+- **Modern JSX Transform**: Updated build system to use React 19's automatic JSX runtime
+- **Enhanced TypeScript Config**: Added `jsxImportSource` for better React 19 integration
+
+#### 🔧 Fixed
+
+- **Critical: Circular Dependency**: Removed self-referencing dependency that prevented package installation
+- **Build System**: Switched from `tsc` to optimized `tsup` build process for React 19 compatibility
+- **Package Exports**: Improved build output with proper ESM/CJS dual package support
+
+#### 📚 Documentation
+
+- Updated README with React version compatibility matrix
+- Added comprehensive React 19 migration documentation
+
+#### 🧪 Testing
+
+- All 392 tests passing with React 19 compatibility
+- Verified automatic JSX runtime works correctly
+- Confirmed no breaking changes introduced
+
+## [0.1.1] - 2024-12-26
+
+### 🐛 Bug Fixes
+
+- Minor dependency updates and documentation improvements
+
 ## [0.1.0] - 2024-12-26
 
 ### 🎉 Initial Release

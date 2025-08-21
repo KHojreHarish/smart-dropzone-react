@@ -40,6 +40,12 @@ pnpm add smart-dropzone-react
 npm install react react-dom
 ```
 
+**React Version Support:**
+
+- ✅ React 18.x (Full support)
+- ✅ React 19.x (Full support with latest features)
+- 🔄 React 17.x (Legacy support - may have compatibility issues)
+
 ## 🚀 **Quick Start**
 
 ### Zero Configuration (Cloudinary)
