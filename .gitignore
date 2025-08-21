@@ -25,6 +25,11 @@ coverage/
 *.lcov
 .jest/
 
+# Vitest cache and results
+.vitest/
+**/vitest/
+**/results.json
+
 # IDE and Editor files
 .vscode/
 .idea/
@@ -83,6 +88,10 @@ jspm_packages/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
+
+# Vite and Vitest cache
+.vite/
+**/.vite/
 
 # Next.js build output
 .next
