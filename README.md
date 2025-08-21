@@ -443,7 +443,7 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 
 ```bash
 # Clone the repository
-git clone https://github.com/tanflare/smart-dropzone.git
+git clone https://github.com/harishkhojare/smart-dropzone.git
 
 # Install dependencies
 pnpm install

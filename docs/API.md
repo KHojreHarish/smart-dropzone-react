@@ -1,6 +1,6 @@
 # 📚 Smart Dropzone API Reference
 
-Complete API documentation for `@tanflare/smart-dropzone` package.
+Complete API documentation for `smart-dropzone-react` package.
 
 ## 📋 Table of Contents
 
@@ -18,7 +18,7 @@ Complete API documentation for `@tanflare/smart-dropzone` package.
 The recommended component for most use cases. Provides smart defaults and preset configurations.
 
 ```tsx
-import { SmartDropzoneSimple } from "@tanflare/smart-dropzone";
+import { SmartDropzoneSimple } from "smart-dropzone-react";
 
 <SmartDropzoneSimple
   preset="gallery"
@@ -76,7 +76,7 @@ import {
 Advanced component with full control over all features.
 
 ```tsx
-import { SmartDropzone, CloudinaryProvider } from "@tanflare/smart-dropzone";
+import { SmartDropzone, CloudinaryProvider } from "smart-dropzone-react";
 
 const provider = new CloudinaryProvider({
   cloudName: "your-cloud-name",
@@ -117,7 +117,7 @@ const provider = new CloudinaryProvider({
 Individual file display component.
 
 ```tsx
-import { FileItem } from "@tanflare/smart-dropzone";
+import { FileItem } from "smart-dropzone-react";
 
 <FileItem
   file={file}
@@ -138,7 +138,7 @@ import { FileItem } from "@tanflare/smart-dropzone";
 Custom hook for managing upload state and operations.
 
 ```tsx
-import { useUpload } from "@tanflare/smart-dropzone";
+import { useUpload } from "smart-dropzone-react";
 
 const {
   files,
@@ -179,7 +179,7 @@ const {
 Cloudinary upload provider implementation.
 
 ```tsx
-import { CloudinaryProvider } from "@tanflare/smart-dropzone";
+import { CloudinaryProvider } from "smart-dropzone-react";
 
 const provider = new CloudinaryProvider({
   cloudName: "your-cloud-name",
@@ -216,7 +216,7 @@ await provider.initialize();
 Handles file processing, validation, and preview generation.
 
 ```tsx
-import { FileProcessor } from "@tanflare/smart-dropzone";
+import { FileProcessor } from "smart-dropzone-react";
 
 const processor = new FileProcessor(options);
 const result = await processor.processFiles(files);
@@ -227,7 +227,7 @@ const result = await processor.processFiles(files);
 Manages file preview generation and caching.
 
 ```tsx
-import { FilePreviewManager } from "@tanflare/smart-dropzone";
+import { FilePreviewManager } from "smart-dropzone-react";
 
 const manager = FilePreviewManager.getInstance();
 const preview = await manager.generatePreview(file, options);
@@ -238,7 +238,7 @@ const preview = await manager.generatePreview(file, options);
 Handles drag and drop reordering functionality.
 
 ```tsx
-import { DragReorderManager } from "@tanflare/smart-dropzone";
+import { DragReorderManager } from "smart-dropzone-react";
 
 const manager = new DragReorderManager({
   enableReordering: true,
@@ -251,7 +251,7 @@ const manager = new DragReorderManager({
 Manages upload resumption and chunked uploads.
 
 ```tsx
-import { UploadResumeManager } from "@tanflare/smart-dropzone";
+import { UploadResumeManager } from "smart-dropzone-react";
 
 const manager = UploadResumeManager.getInstance();
 const result = await manager.resumeUpload(fileId, provider);
@@ -262,7 +262,7 @@ const result = await manager.resumeUpload(fileId, provider);
 Tracks performance metrics and optimization.
 
 ```tsx
-import { PerformanceMonitor } from "@tanflare/smart-dropzone";
+import { PerformanceMonitor } from "smart-dropzone-react";
 
 const monitor = PerformanceMonitor.getInstance();
 monitor.startRender();
@@ -274,7 +274,7 @@ const metrics = monitor.getMetrics();
 Manages accessibility features and configurations.
 
 ```tsx
-import { AccessibilityManager } from "@tanflare/smart-dropzone";
+import { AccessibilityManager } from "smart-dropzone-react";
 
 const manager = AccessibilityManager.getInstance();
 manager.updateConfig({
@@ -288,7 +288,7 @@ manager.updateConfig({
 Handles multi-language support and localization.
 
 ```tsx
-import { InternationalizationManager } from "@tanflare/smart-dropzone";
+import { InternationalizationManager } from "smart-dropzone-react";
 
 const manager = InternationalizationManager.getInstance();
 manager.setLocale("es");
@@ -373,7 +373,7 @@ import {
   getSmartDefaults, 
   getPreset, 
   mergePreset 
-} from "@tanflare/smart-dropzone";
+} from "smart-dropzone-react";
 
 // Get smart defaults
 const defaults = getSmartDefaults();
@@ -388,7 +388,7 @@ const config = mergePreset("gallery", { maxFiles: 50 });
 ### File Utilities
 
 ```tsx
-import { FileProcessor } from "@tanflare/smart-dropzone";
+import { FileProcessor } from "smart-dropzone-react";
 
 // Format file size
 const size = FileProcessor.formatFileSize(1024 * 1024); // "1 MB"
@@ -405,7 +405,7 @@ const isDocument = FileProcessor.isDocument("application/pdf"); // true
 ### Validation
 
 ```tsx
-import { InputValidator } from "@tanflare/smart-dropzone";
+import { InputValidator } from "smart-dropzone-react";
 
 // Validate file
 const result = InputValidator.validateFile(file);
@@ -420,7 +420,7 @@ const listResult = InputValidator.validateFileList(files);
 ### Error Handling
 
 ```tsx
-import { UploadError } from "@tanflare/smart-dropzone";
+import { UploadError } from "smart-dropzone-react";
 
 // Create specific error types
 const validationError = UploadError.validationError("File too large", "large.jpg");

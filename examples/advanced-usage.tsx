@@ -17,7 +17,7 @@ import {
   type PreviewOptions,
   type DragReorderOptions,
   type ResumeOptions
-} from '@tanflare/smart-dropzone';
+} from 'smart-dropzone-react';
 
 // Example 1: Basic Usage with Enhanced Features
 export const BasicAdvancedExample: React.FC = () => {

@@ -142,7 +142,7 @@
 
 ## 🏆 **CONCLUSION**
 
-The **@tanflare/smart-dropzone** package has successfully passed comprehensive testing with:
+The **smart-dropzone-react** package has successfully passed comprehensive testing with:
 
 - **✅ 42+ individual test cases**
 - **✅ 100% core functionality working**

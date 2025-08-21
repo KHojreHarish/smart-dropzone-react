@@ -99,12 +99,12 @@ const SMART_DEFAULTS = {
 
 ```tsx
 // Full package (largest bundle)
-import { SmartDropzoneSimple } from "@tanflare/smart-dropzone";
+import { SmartDropzoneSimple } from "smart-dropzone-react";
 
 // Individual components (smaller bundle)
-import { SimpleUpload } from "@tanflare/smart-dropzone/components/simple-upload";
-import { CloudinaryProvider } from "@tanflare/smart-dropzone/providers/cloudinary";
-import { useUpload } from "@tanflare/smart-dropzone/hooks/use-upload";
+import { SimpleUpload } from "smart-dropzone-react/components/simple-upload";
+import { CloudinaryProvider } from "smart-dropzone-react/providers/cloudinary";
+import { useUpload } from "smart-dropzone-react/hooks/use-upload";
 ```
 
 #### **Expected Bundle Sizes**
