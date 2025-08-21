@@ -25,17 +25,17 @@ import { SmartDropzoneSimple } from "smart-dropzone-react";
   cloudinary={{ cloudName: "demo", uploadPreset: "demo" }}
   overrides={{ maxFiles: 50 }}
   onFilesAdded={handleFiles}
-/>
+/>;
 ```
 
 #### Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `preset` | `PresetName` | `undefined` | Use a preset configuration |
-| `cloudinary` | `CloudinaryConfig` | **Required** | Cloudinary configuration |
-| `overrides` | `Partial<SmartDropzoneProps>` | `{}` | Override preset/default values |
-| `...props` | `SmartDropzoneProps` | - | All SmartDropzone props |
+| Prop         | Type                          | Default      | Description                    |
+| ------------ | ----------------------------- | ------------ | ------------------------------ |
+| `preset`     | `PresetName`                  | `undefined`  | Use a preset configuration     |
+| `cloudinary` | `CloudinaryConfig`            | **Required** | Cloudinary configuration       |
+| `overrides`  | `Partial<SmartDropzoneProps>` | `{}`         | Override preset/default values |
+| `...props`   | `SmartDropzoneProps`          | -            | All SmartDropzone props        |
 
 #### Preset Options
 
@@ -50,12 +50,12 @@ import { SmartDropzoneSimple } from "smart-dropzone-react";
 Pre-configured components for common use cases:
 
 ```tsx
-import { 
-  SimpleUpload, 
-  GalleryUpload, 
-  DocumentUpload, 
-  MediaUpload, 
-  EnterpriseUpload 
+import {
+  SimpleUpload,
+  GalleryUpload,
+  DocumentUpload,
+  MediaUpload,
+  EnterpriseUpload
 } from "@tanflare/smart-dropzone";
 
 // Simple blog/contact form upload
@@ -90,27 +90,27 @@ const provider = new CloudinaryProvider({
   showPreview={true}
   showProgress={true}
   onFilesAdded={handleFiles}
-/>
+/>;
 ```
 
 #### Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `provider` | `UploadProvider` | **Required** | Upload provider instance |
-| `maxFiles` | `number` | `10` | Maximum number of files |
-| `maxFileSize` | `number` | `10MB` | Maximum file size in bytes |
-| `allowedTypes` | `string[]` | `['image/*', 'application/pdf']` | Allowed MIME types |
-| `showPreview` | `boolean` | `true` | Show file previews |
-| `showProgress` | `boolean` | `true` | Show upload progress |
-| `showFileSize` | `boolean` | `true` | Show file size |
-| `showFileType` | `boolean` | `true` | Show file type |
-| `theme` | `'light' \| 'dark'` | `'light'` | Theme variant |
-| `variant` | `'outlined' \| 'filled' \| 'minimal'` | `'outlined'` | Visual variant |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Component size |
-| `onFilesAdded` | `(files: File[]) => void` | - | Files added callback |
-| `onUploadComplete` | `(files: UploadFile[]) => void` | - | Upload complete callback |
-| `onValidationError` | `(error: string) => void` | - | Validation error callback |
+| Prop                | Type                                  | Default                          | Description                |
+| ------------------- | ------------------------------------- | -------------------------------- | -------------------------- |
+| `provider`          | `UploadProvider`                      | **Required**                     | Upload provider instance   |
+| `maxFiles`          | `number`                              | `10`                             | Maximum number of files    |
+| `maxFileSize`       | `number`                              | `10MB`                           | Maximum file size in bytes |
+| `allowedTypes`      | `string[]`                            | `['image/*', 'application/pdf']` | Allowed MIME types         |
+| `showPreview`       | `boolean`                             | `true`                           | Show file previews         |
+| `showProgress`      | `boolean`                             | `true`                           | Show upload progress       |
+| `showFileSize`      | `boolean`                             | `true`                           | Show file size             |
+| `showFileType`      | `boolean`                             | `true`                           | Show file type             |
+| `theme`             | `'light' \| 'dark'`                   | `'light'`                        | Theme variant              |
+| `variant`           | `'outlined' \| 'filled' \| 'minimal'` | `'outlined'`                     | Visual variant             |
+| `size`              | `'sm' \| 'md' \| 'lg'`                | `'md'`                           | Component size             |
+| `onFilesAdded`      | `(files: File[]) => void`             | -                                | Files added callback       |
+| `onUploadComplete`  | `(files: UploadFile[]) => void`       | -                                | Upload complete callback   |
+| `onValidationError` | `(error: string) => void`             | -                                | Validation error callback  |
 
 ### FileItem
 
@@ -128,7 +128,7 @@ import { FileItem } from "smart-dropzone-react";
   showPreview={true}
   showProgress={true}
   theme="light"
-/>
+/>;
 ```
 
 ## 🪝 Hooks
@@ -160,17 +160,17 @@ const {
 
 #### Returns
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `files` | `UploadFile[]` | Array of uploaded files |
-| `isUploading` | `boolean` | Upload in progress flag |
-| `error` | `string \| null` | Current error message |
-| `uploadProgress` | `Record<string, number>` | Upload progress by file ID |
-| `addFiles` | `(files: File[]) => Promise<FileProcessingResult>` | Add files function |
-| `removeFile` | `(fileId: string) => void` | Remove file function |
-| `uploadAll` | `() => Promise<UploadResponse[]>` | Upload all files function |
-| `retryUpload` | `(fileId: string) => Promise<void>` | Retry upload function |
-| `cancelUpload` | `(fileId: string) => void` | Cancel upload function |
+| Property         | Type                                               | Description                |
+| ---------------- | -------------------------------------------------- | -------------------------- |
+| `files`          | `UploadFile[]`                                     | Array of uploaded files    |
+| `isUploading`    | `boolean`                                          | Upload in progress flag    |
+| `error`          | `string \| null`                                   | Current error message      |
+| `uploadProgress` | `Record<string, number>`                           | Upload progress by file ID |
+| `addFiles`       | `(files: File[]) => Promise<FileProcessingResult>` | Add files function         |
+| `removeFile`     | `(fileId: string) => void`                         | Remove file function       |
+| `uploadAll`      | `() => Promise<UploadResponse[]>`                  | Upload all files function  |
+| `retryUpload`    | `(fileId: string) => Promise<void>`                | Retry upload function      |
+| `cancelUpload`   | `(fileId: string) => void`                         | Cancel upload function     |
 
 ## 🚀 Providers
 
@@ -192,13 +192,13 @@ await provider.initialize();
 
 #### Configuration
 
-| Property | Type | Required | Description |
-|----------|------|----------|-------------|
-| `cloudName` | `string` | ✅ | Cloudinary cloud name |
-| `uploadPreset` | `string` | ✅ | Upload preset name |
-| `defaultFolder` | `string` | ❌ | Default upload folder |
-| `apiKey` | `string` | ❌ | API key (for server-side) |
-| `apiSecret` | `string` | ❌ | API secret (for server-side) |
+| Property        | Type     | Required | Description                  |
+| --------------- | -------- | -------- | ---------------------------- |
+| `cloudName`     | `string` | ✅       | Cloudinary cloud name        |
+| `uploadPreset`  | `string` | ✅       | Upload preset name           |
+| `defaultFolder` | `string` | ❌       | Default upload folder        |
+| `apiKey`        | `string` | ❌       | API key (for server-side)    |
+| `apiSecret`     | `string` | ❌       | API secret (for server-side) |
 
 #### Methods
 
@@ -317,13 +317,13 @@ interface UploadFile {
 ### UploadStatus
 
 ```tsx
-type UploadStatus = 
-  | "pending"    // File added, not yet uploaded
-  | "uploading"  // Currently uploading
-  | "uploaded"   // Successfully uploaded
-  | "failed"     // Upload failed
-  | "cancelled"  // Upload cancelled
-  | "processing" // File being processed
+type UploadStatus =
+  | "pending" // File added, not yet uploaded
+  | "uploading" // Currently uploading
+  | "uploaded" // Successfully uploaded
+  | "failed" // Upload failed
+  | "cancelled" // Upload cancelled
+  | "processing"; // File being processed
 ```
 
 ### UploadResponse
@@ -356,9 +356,9 @@ interface SmartDefaults {
   enableResume: boolean;
   enableI18n: boolean;
   accessibility: boolean;
-  theme: 'light' | 'dark';
-  variant: 'outlined' | 'filled' | 'minimal';
-  size: 'sm' | 'md' | 'lg';
+  theme: "light" | "dark";
+  variant: "outlined" | "filled" | "minimal";
+  size: "sm" | "md" | "lg";
 }
 ```
 
@@ -367,12 +367,12 @@ interface SmartDefaults {
 ### Smart Defaults
 
 ```tsx
-import { 
-  SMART_DEFAULTS, 
-  PRESETS, 
-  getSmartDefaults, 
-  getPreset, 
-  mergePreset 
+import {
+  SMART_DEFAULTS,
+  PRESETS,
+  getSmartDefaults,
+  getPreset,
+  mergePreset,
 } from "smart-dropzone-react";
 
 // Get smart defaults
@@ -423,8 +423,15 @@ const listResult = InputValidator.validateFileList(files);
 import { UploadError } from "smart-dropzone-react";
 
 // Create specific error types
-const validationError = UploadError.validationError("File too large", "large.jpg");
-const uploadError = UploadError.uploadError("Network failed", "file123", "test.jpg");
+const validationError = UploadError.validationError(
+  "File too large",
+  "large.jpg"
+);
+const uploadError = UploadError.uploadError(
+  "Network failed",
+  "file123",
+  "test.jpg"
+);
 const networkError = UploadError.networkError("Connection lost", "file123");
 ```
 

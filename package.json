@@ -106,11 +106,11 @@
   "author": "Tanflare Team",
   "license": "MIT",
   "repository": {
-  "type": "git",
-  "url": "git+https://github.com/harishkhojare/smart-dropzone.git"
-},
+    "type": "git",
+    "url": "git+https://github.com/harishkhojare/smart-dropzone.git"
+  },
   "bugs": {
-  "url": "https://github.com/harishkhojare/smart-dropzone/issues"
-},
+    "url": "https://github.com/harishkhojare/smart-dropzone/issues"
+  },
   "homepage": "https://github.com/harishkhojare/smart-dropzone#readme"
 }
