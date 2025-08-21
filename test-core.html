@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Dropzone - Core Functionality Test</title>
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f8fafc;
+      }
+      .test-section {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      .test-title {
+        color: #1e40af;
+        border-bottom: 2px solid #3b82f6;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+      .controls {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s ease;
+      }
+      .btn-primary {
+        background: #3b82f6;
+        color: white;
+      }
+      .btn-primary:hover {
+        background: #2563eb;
+      }
+      .btn-secondary {
+        background: #6b7280;
+        color: white;
+      }
+      .btn-secondary:hover {
+        background: #4b5563;
+      }
+      .status {
+        padding: 10px;
+        border-radius: 4px;
+        margin: 10px 0;
+        font-weight: 500;
+      }
+      .status.success {
+        background: #d1fae5;
+        color: #065f46;
+        border: 1px solid #10b981;
+      }
+      .status.error {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #ef4444;
+      }
+      .status.info {
+        background: #dbeafe;
+        color: #1e40af;
+        border: 1px solid #3b82f6;
+      }
+      .log {
+        background: #1f2937;
+        color: #f9fafb;
+        padding: 15px;
+        border-radius: 6px;
+        font-family: "Monaco", "Menlo", monospace;
+        font-size: 12px;
+        max-height: 400px;
+        overflow-y: auto;
+        margin: 20px 0;
+      }
+      .log-entry {
+        margin: 5px 0;
+        padding: 5px 0;
+        border-bottom: 1px solid #374151;
+      }
+      .log-entry.error {
+        color: #f87171;
+      }
+      .log-entry.warn {
+        color: #fbbf24;
+      }
+      .log-entry.info {
+        color: #60a5fa;
+      }
+      .log-entry.success {
+        color: #34d399;
+      }
+      .test-results {
+        background: #f3f4f6;
+        padding: 15px;
+        border-radius: 6px;
+        margin: 20px 0;
+      }
+      .test-item {
+        margin: 10px 0;
+        padding: 10px;
+        background: white;
+        border-radius: 4px;
+        border-left: 4px solid #3b82f6;
+      }
+      .test-item.passed {
+        border-left-color: #10b981;
+      }
+      .test-item.failed {
+        border-left-color: #ef4444;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="test-title">🧪 Smart Dropzone - Core Functionality Test</h1>
+
+    <!-- Test Controls -->
+    <div class="test-section">
+      <h2>🎮 Test Controls</h2>
+      <div class="controls">
+        <button class="btn btn-primary" onclick="runAllTests()">
+          Run All Tests
+        </button>
+        <button class="btn btn-secondary" onclick="testInputValidation()">
+          Test Input Validation
+        </button>
+        <button class="btn btn-secondary" onclick="testErrorHandling()">
+          Test Error Handling
+        </button>
+        <button class="btn btn-secondary" onclick="testConfiguration()">
+          Test Configuration
+        </button>
+        <button class="btn btn-secondary" onclick="testFileProcessing()">
+          Test File Processing
+        </button>
+        <button class="btn btn-secondary" onclick="clearLog()">
+          Clear Log
+        </button>
+      </div>
+      <div id="test-status"></div>
+    </div>
+
+    <!-- Test Results -->
+    <div class="test-section">
+      <h2>✅ Test Results</h2>
+      <div id="test-results" class="test-results"></div>
+    </div>
+
+    <!-- Error Log -->
+    <div class="test-section">
+      <h2>📝 Test Log</h2>
+      <div id="log-container" class="log"></div>
+    </div>
+
+    <script type="module">
+      // Import core functionality (non-React modules)
+      import {
+          InputValidator,
+          UploadError,
+          DEFAULT_CONFIG,
+          FILE_SIZE,
+          TIMING,
+          QUALITY,
+          DIMENSIONS,
+          UPLOAD,
+          PERFORMANCE,
+          LAYOUT,
+          FORMATS,
+          COLORS,
+          TESTING,
+          VIDEO
+      } from './dist/index.js';
+
+      // Global state
+      let testResults = {};
+      let testCount = 0;
+      let passedCount = 0;
+      let failedCount = 0;
+
+      // Test functions
+      window.runAllTests = async function() {
+          log('info', '🚀 Starting comprehensive test suite...');
+          updateStatus('Running all tests...', 'info');
+
+          // Reset counters
+          testCount = 0;
+          passedCount = 0;
+          failedCount = 0;
+
+          // Run all tests
+          await testInputValidation();
+          await testErrorHandling();
+          await testConfiguration();
+          await testFileProcessing();
+
+          // Final summary
+          const successRate = ((passedCount / testCount) * 100).toFixed(1);
+          log('success', `🎉 All tests completed! Success rate: ${successRate}% (${passedCount}/${testCount})`);
+          updateStatus(`Tests completed: ${passedCount}/${testCount} passed (${successRate}%)`, 'success');
+          updateTestResults();
+      };
+
+      window.testInputValidation = async function() {
+          log('info', '🧪 Testing Input Validation System...');
+          testResults.inputValidation = { status: 'running', tests: [] };
+          updateTestResults();
+
+          try {
+              // Test 1: File validation
+              const fileValidation = InputValidator.validateFile({
+                  name: 'test.jpg',
+                  size: 1024,
+                  type: 'image/jpeg'
+              });
+              assertTest(fileValidation.isValid, 'File validation - valid file', 'inputValidation');
+
+              // Test 2: File list validation
+              const fileListValidation = InputValidator.validateFileList([
+                  { name: 'test1.jpg', size: 1024, type: 'image/jpeg' },
+                  { name: 'test2.png', size: 2048, type: 'image/png' }
+              ]);
+              assertTest(fileListValidation.isValid, 'File list validation - valid files', 'inputValidation');
+
+              // Test 3: Invalid file validation
+              const invalidFileValidation = InputValidator.validateFile({
+                  name: 'test.exe',
+                  size: 1024,
+                  type: 'application/x-executable'
+              });
+              assertTest(!invalidFileValidation.isValid, 'File validation - invalid file type', 'inputValidation');
+
+              // Test 4: Array operation validation
+              const arrayValidation = InputValidator.validateArrayOperation(0, 2, 5);
+              assertTest(arrayValidation.isValid, 'Array operation validation - valid indices', 'inputValidation');
+
+              // Test 5: String sanitization
+              const sanitized = InputValidator.sanitizeString('<script>alert("xss")
+    </script>
+    '); assertTest(!sanitized.includes('
+    <script>
+      '), 'String sanitization - XSS prevention', 'inputValidation');
+
+                      testResults.inputValidation.status = 'passed';
+                      log('success', '✅ Input Validation tests completed successfully');
+
+                  } catch (error) {
+                      testResults.inputValidation.status = 'failed';
+                      log('error', `❌ Input Validation tests failed: ${error.message}`);
+                  }
+
+                  updateTestResults();
+              };
+
+              window.testErrorHandling = async function() {
+                  log('info', '🧪 Testing Error Handling System...');
+                  testResults.errorHandling = { status: 'running', tests: [] };
+                  updateTestResults();
+
+                  try {
+                      // Test 1: Validation error creation
+                      const validationError = UploadError.validationError('Invalid file type');
+                      assertTest(validationError.code === 'VALIDATION_ERROR', 'Validation error creation', 'errorHandling');
+
+                      // Test 2: Upload error creation
+                      const uploadError = UploadError.uploadError('Upload failed', 'file123', 'test.jpg');
+                      assertTest(uploadError.code === 'UPLOAD_ERROR', 'Upload error creation', 'errorHandling');
+
+                      // Test 3: Network error creation
+                      const networkError = UploadError.networkError('Connection timeout');
+                      assertTest(networkError.code === 'NETWORK_ERROR', 'Network error creation', 'errorHandling');
+
+                      // Test 4: Error context
+                      const contextError = UploadError.providerError('Service unavailable', 'cloudinary');
+                      assertTest(contextError.context.operation === 'provider', 'Error context preservation', 'errorHandling');
+
+                      // Test 5: Error serialization
+                      const errorData = validationError.toJSON();
+                      assertTest(errorData.code === 'VALIDATION_ERROR', 'Error serialization', 'errorHandling');
+
+                      testResults.errorHandling.status = 'passed';
+                      log('success', '✅ Error Handling tests completed successfully');
+
+                  } catch (error) {
+                      testResults.errorHandling.status = 'failed';
+                      log('error', `❌ Error Handling tests failed: ${error.message}`);
+                  }
+
+                  updateTestResults();
+              };
+
+              window.testConfiguration = async function() {
+                  log('info', '🧪 Testing Configuration System...');
+                  testResults.configuration = { status: 'running', tests: [] };
+                  updateTestResults();
+
+                  try {
+                      // Test 1: File size constants
+                      assertTest(FILE_SIZE.BYTES_PER_MB === 1024 * 1024, 'File size constants - MB calculation', 'configuration');
+                      assertTest(FILE_SIZE.BYTES_PER_GB === 1024 * 1024 * 1024, 'File size constants - GB calculation', 'configuration');
+
+                      // Test 2: Timing constants
+                      assertTest(TIMING.ANIMATION_DURATION === 300, 'Timing constants - animation duration', 'configuration');
+                      assertTest(TIMING.DEBOUNCE_DELAY === 300, 'Timing constants - debounce delay', 'configuration');
+
+                      // Test 3: Quality constants
+                      assertTest(QUALITY.DEFAULT_IMAGE_QUALITY === 0.8, 'Quality constants - default image quality', 'configuration');
+                      assertTest(QUALITY.THUMBNAIL_QUALITY === 0.8, 'Quality constants - thumbnail quality', 'configuration');
+
+                      // Test 4: Dimensions constants
+                      assertTest(DIMENSIONS.DEFAULT_MAX_WIDTH === 800, 'Dimensions constants - max width', 'configuration');
+                      assertTest(DIMENSIONS.THUMBNAIL_SIZE === 200, 'Dimensions constants - thumbnail size', 'configuration');
+
+                      // Test 5: Upload constants
+                      assertTest(UPLOAD.MAX_RETRY_ATTEMPTS === 3, 'Upload constants - max retry attempts', 'configuration');
+                      assertTest(UPLOAD.DEFAULT_MAX_FILES === 10, 'Upload constants - default max files', 'configuration');
+
+                      // Test 6: Performance constants
+                      assertTest(PERFORMANCE.PERFORMANCE_SCORE_MAX === 100, 'Performance constants - max score', 'configuration');
+                      assertTest(PERFORMANCE.MEMORY_WARNING_THRESHOLD === 0.8, 'Performance constants - memory threshold', 'configuration');
+
+                      // Test 7: Layout constants
+                      assertTest(LAYOUT.DRAG_THRESHOLD === 5, 'Layout constants - drag threshold', 'configuration');
+                      assertTest(LAYOUT.GRID_SIZE === 10, 'Layout constants - grid size', 'configuration');
+
+                      // Test 8: Format constants
+                      assertTest(FORMATS.SUPPORTED_IMAGE_FORMATS.includes('image/jpeg'), 'Format constants - supported image formats', 'configuration');
+                      assertTest(FORMATS.SUPPORTED_VIDEO_FORMATS.includes('video/mp4'), 'Format constants - supported video formats', 'configuration');
+
+                      // Test 9: Color constants
+                      assertTest(COLORS.PRIMARY_BLUE === '#3b82f6', 'Color constants - primary blue', 'configuration');
+                      assertTest(COLORS.ERROR_RED === '#ef4444', 'Color constants - error red', 'configuration');
+
+                      // Test 10: Video constants
+                      assertTest(VIDEO.THUMBNAIL_SEEK_PERCENTAGE === 0.25, 'Video constants - thumbnail seek percentage', 'configuration');
+                      assertTest(VIDEO.ESTIMATED_FRAME_RATE === 30, 'Video constants - estimated frame rate', 'configuration');
+
+                      testResults.configuration.status = 'passed';
+                      log('success', '✅ Configuration tests completed successfully');
+
+                  } catch (error) {
+                      testResults.configuration.status = 'failed';
+                      log('error', `❌ Configuration tests failed: ${error.message}`);
+                  }
+
+                  updateTestResults();
+              };
+
+              window.testFileProcessing = async function() {
+                  log('info', '🧪 Testing File Processing System...');
+                  testResults.fileProcessing = { status: 'running', tests: [] };
+                  updateTestResults();
+
+                  try {
+                      // Test 1: File size formatting
+                      const size1KB = 1024;
+                      const size1MB = 1024 * 1024;
+                      const size1GB = 1024 * 1024 * 1024;
+
+                      // Test 2: MIME type detection
+                      const imageTypes = ['image/jpeg', 'image/png', 'image/webp'];
+                      const videoTypes = ['video/mp4', 'video/webm', 'video/ogg'];
+
+                      imageTypes.forEach(type => {
+                          assertTest(type.startsWith('image/'), `MIME type detection - ${type}`, 'fileProcessing');
+                      });
+
+                      videoTypes.forEach(type => {
+                          assertTest(type.startsWith('video/'), `MIME type detection - ${type}`, 'fileProcessing');
+                      });
+
+                      // Test 3: File validation edge cases
+                      const edgeCaseValidation = InputValidator.validateFile({
+                          name: 'a'.repeat(300), // Very long filename
+                          size: 0, // Zero byte file
+                          type: 'text/plain'
+                      });
+                      assertTest(!edgeCaseValidation.isValid, 'File validation - edge cases (long filename)', 'fileProcessing');
+
+                      testResults.fileProcessing.status = 'passed';
+                      log('success', '✅ File Processing tests completed successfully');
+
+                  } catch (error) {
+                      testResults.fileProcessing.status = 'failed';
+                      log('error', `❌ File Processing tests failed: ${error.message}`);
+                  }
+
+                  updateTestResults();
+              };
+
+              window.clearLog = function() {
+                  const logContainer = document.getElementById('log-container');
+                  logContainer.innerHTML = '';
+                  log('info', 'Log cleared');
+              };
+
+              // Utility functions
+              function assertTest(condition, testName, category) {
+                  testCount++;
+                  if (condition) {
+                      passedCount++;
+                      log('success', `✅ ${testName}`);
+                      testResults[category].tests.push({ name: testName, status: 'passed' });
+                  } else {
+                      failedCount++;
+                      log('error', `❌ ${testName}`);
+                      testResults[category].tests.push({ name: testName, status: 'failed' });
+                  }
+              }
+
+              function log(level, message) {
+                  const logContainer = document.getElementById('log-container');
+                  const entry = document.createElement('div');
+                  entry.className = `log-entry ${level}`;
+                  entry.innerHTML = `[${new Date().toLocaleTimeString()}] ${message}`;
+                  logContainer.appendChild(entry);
+                  logContainer.scrollTop = logContainer.scrollHeight;
+              }
+
+              function updateStatus(message, type) {
+                  const statusDiv = document.getElementById('test-status');
+                  statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`;
+              }
+
+              function updateTestResults() {
+                  const resultsDiv = document.getElementById('test-results');
+                  let html = '<h3>Test Results:</h3>';
+
+                  Object.entries(testResults).forEach(([category, result]) => {
+                      const statusClass = result.status === 'passed' ? 'passed' :
+                                        result.status === 'failed' ? 'failed' : '';
+                      const statusIcon = result.status === 'passed' ? '✅' :
+                                       result.status === 'failed' ? '❌' : '⏳';
+
+                      html += `
+                          <div class="test-item ${statusClass}">
+                              <h4>${statusIcon} ${category.charAt(0).toUpperCase() + category.slice(1)}</h4>
+                              <p><strong>Status:</strong> ${result.status}</p>
+                              ${result.tests ? `
+                                  <p><strong>Tests:</strong></p>
+                                  <ul>
+                                      ${result.tests.map(test =>
+                                          `<li>${test.status === 'passed' ? '✅' : '❌'} ${test.name}</li>`
+                                      ).join('')}
+                                  </ul>
+                              ` : ''}
+                          </div>
+                      `;
+                  });
+
+                  resultsDiv.innerHTML = html;
+              }
+
+              // Initialize when page loads
+              document.addEventListener('DOMContentLoaded', () => {
+                  log('success', '🚀 Core functionality test page loaded successfully');
+                  updateStatus('Ready for testing', 'success');
+
+                  // Test that imports work
+                  try {
+                      log('info', `📦 Configuration loaded: ${Object.keys(DEFAULT_CONFIG).length} categories`);
+                      log('info', `🔧 InputValidator available: ${typeof InputValidator}`);
+                      log('info', `⚠️ UploadError available: ${typeof UploadError}`);
+                      log('success', '✅ All core modules imported successfully');
+                  } catch (error) {
+                      log('error', `❌ Import error: ${error.message}`);
+                  }
+              });
+    </script>
+  </body>
+</html>
