@@ -30,6 +30,7 @@ export interface CloudinaryConfig {
 
 /**
  * Cloudinary upload provider implementation
+ * Optimized for Cloudflare Workers environment
  */
 export class CloudinaryProvider extends UploadProvider {
   private readonly cloudName: string;
@@ -42,32 +43,41 @@ export class CloudinaryProvider extends UploadProvider {
 
   constructor(config: CloudinaryConfig) {
     super("cloudinary", config);
+
+    // Validate required configuration
+    if (!config.cloudName) {
+      throw new Error("Cloudinary cloud name is required");
+    }
+
     this.cloudName = config.cloudName;
     // this.apiKey = config.apiKey;
     // this.apiSecret = config.apiSecret;
     this.uploadPreset = config.uploadPreset;
     this.defaultFolder = config.defaultFolder;
+
+
   }
 
   /**
    * Initialize the Cloudinary provider
+   * Compatible with Cloudflare Workers environment
    */
   async initialize(): Promise<void> {
     if (!this.cloudName) {
       throw new Error("Cloudinary cloud name is required");
     }
 
-    // Test connection by making a simple request
+    // For Cloudflare Workers, we'll skip the connection test
+    // as it may not be necessary and could cause issues
     try {
-      const response = await fetch(
-        `https://res.cloudinary.com/${this.cloudName}/image/upload/v1/`
-      );
-      if (response.ok) {
+      // Simple validation instead of connection test
+      if (typeof this.cloudName === "string" && this.cloudName.length > 0) {
         this.initialized = true;
       } else {
-        throw new Error(`Failed to connect to Cloudinary: ${response.status}`);
+        throw new Error("Invalid cloud name");
       }
     } catch (error) {
+      console.error("❌ CloudinaryProvider initialization failed:", error);
       throw new Error(
         `Failed to initialize Cloudinary provider: ${error instanceof Error ? error.message : "Unknown error"}`
       );

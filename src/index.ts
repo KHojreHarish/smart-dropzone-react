@@ -1,3 +1,5 @@
+
+
 // Core exports
 export { UploadProvider, ProviderFactory } from "./core/provider";
 export { FileProcessor } from "./core/file-processor";
@@ -85,13 +87,15 @@ export { FileItem } from "./components/file-item";
 
 // NEW: Simplified components with smart defaults
 export { SmartDropzoneSimple } from "./components/smart-dropzone-simple";
-export { 
-  SimpleUpload, 
-  GalleryUpload, 
-  DocumentUpload, 
-  MediaUpload, 
-  EnterpriseUpload 
+export {
+  SimpleUpload,
+  GalleryUpload,
+  DocumentUpload,
+  MediaUpload,
+  EnterpriseUpload,
 } from "./components/smart-dropzone-simple";
+
+
 
 // Hook exports
 export { useUpload } from "./hooks/use-upload";
@@ -118,6 +122,10 @@ ProviderFactory.register("cloudinary", CloudinaryProvider);
 
 // Re-export provider factory for convenience
 export { ProviderFactory as UploadProviderFactory };
+
+
+
+
 
 // Tree-shaking friendly exports
 // Import only what you need:

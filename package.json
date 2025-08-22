@@ -1,33 +1,39 @@
 {
   "name": "smart-dropzone-react",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "🚀 A production-ready React dropzone component with smart defaults, drag & drop reordering, chunked uploads, resume functionality, and comprehensive provider support (Cloudinary, AWS S3, Supabase)",
   "type": "module",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.js"
-    },
-    "./providers/*": {
-      "types": "./dist/providers/*.d.ts",
-      "import": "./dist/providers/*.js",
-      "require": "./dist/providers/*.js"
+      "require": "./dist/index.cjs"
     },
     "./components/*": {
       "types": "./dist/components/*.d.ts",
       "import": "./dist/components/*.js",
-      "require": "./dist/components/*.js"
+      "require": "./dist/components/*.cjs"
+    },
+    "./providers/*": {
+      "types": "./dist/providers/*.d.ts",
+      "import": "./dist/providers/*.js",
+      "require": "./dist/providers/*.cjs"
     },
     "./hooks/*": {
       "types": "./dist/hooks/*.d.ts",
       "import": "./dist/hooks/*.js",
-      "require": "./dist/hooks/*.js"
+      "require": "./dist/hooks/*.cjs"
+    },
+    "./core/*": {
+      "types": "./dist/core/*.d.ts",
+      "import": "./dist/core/*.js",
+      "require": "./dist/core/*.cjs"
     }
   },
+  "sideEffects": false,
   "files": [
     "dist",
     "README.md",
@@ -36,7 +42,8 @@
     "CONTRIBUTING.md"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config vite.dev.config.ts",
+    "dev:lib": "vite",
     "build": "rm -rf dist && tsup",
     "build:full": "tsup",
     "type-check": "tsc --noEmit",
@@ -63,6 +70,7 @@
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.12",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^14.3.1",
     "@testing-library/user-event": "^14.5.2",
@@ -73,11 +81,14 @@
     "@typescript-eslint/parser": "^7.0.0",
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.6.1",
+    "autoprefixer": "^10.4.21",
     "eslint": "^8.0.0",
     "eslint-plugin-react": "^7.0.0",
     "eslint-plugin-react-hooks": "^4.0.0",
     "jsdom": "^24.1.0",
+    "postcss": "^8.5.6",
     "prettier": "^3.0.0",
+    "tailwindcss": "^4.1.12",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
     "vite": "^4.5.0",
@@ -102,7 +113,9 @@
     "smart-defaults",
     "production-ready",
     "react-component",
-    "ui-component"
+    "ui-component",
+    "cloudflare-workers",
+    "tanstack-start"
   ],
   "author": "Harish Khojare <https://github.com/KHojreHarish>",
   "license": "MIT",

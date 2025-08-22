@@ -5,7 +5,7 @@ export default defineConfig({
     // Main entry point (full package)
     index: "src/index.ts",
 
-    // Individual components for tree shaking
+    // Individual components for tree shaking - these should be self-contained
     "components/smart-dropzone": "src/components/smart-dropzone.tsx",
     "components/smart-dropzone-simple":
       "src/components/smart-dropzone-simple.tsx",
@@ -40,11 +40,11 @@ export default defineConfig({
 
   format: ["esm", "cjs"],
   dts: true,
-  splitting: true, // Enable code splitting
+  splitting: true, // Enable code splitting for tree shaking
   sourcemap: true,
   clean: true,
-  treeshake: true, // Aggressive tree shaking
-  minify: true, // Minify output
+  treeshake: true, // Aggressive tree shaking for bundle optimization
+  minify: true, // Minify output for production
 
   // External dependencies (won't be bundled)
   external: ["react", "react-dom"],
@@ -55,14 +55,23 @@ export default defineConfig({
     options.jsxImportSource = "react";
     options.target = "es2020";
 
-    // Additional optimizations
+    // Ensure proper module resolution
+    options.mainFields = ["module", "main"];
+    options.resolveExtensions = [".tsx", ".ts", ".jsx", ".js", ".json"];
+
+    // Keep console logs for debugging (remove in production if needed)
     if (options.minify) {
-      options.drop = ["console", "debugger"];
+      options.drop = ["debugger"]; // Keep console logs
     }
   },
 
-  // Bundle optimization
-  noExternal: [], // Bundle all internal dependencies
+  // Bundle optimization - bundle dependencies for individual components
+  noExternal: [
+    "class-variance-authority",
+    "clsx",
+    "react-dropzone",
+    "tailwind-merge",
+  ],
 
   // Output optimization
   outDir: "dist",
